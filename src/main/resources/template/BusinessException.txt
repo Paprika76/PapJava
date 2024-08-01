@@ -1,0 +1,60 @@
+
+/**
+ * @Description: 业务异常类, 使用场景:程序并未出现执行异常情况,人为抛出异常信息。
+ * 例如：登录功能,账号不存在或密码错误时,可抛出一个业务异常,自定义异常信息
+ * @author Paprika
+ */
+
+public class BusinessException extends RuntimeException {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 异常对应的返回码
+     */
+    private Integer code;
+
+    /**
+     * 异常对应的描述信息
+     */
+    private String message;
+
+
+    public BusinessException(String message) {
+        this.message = message;
+    }
+    public BusinessException(Integer code) {
+        this.code = code;
+    }
+    public BusinessException(ResponseCodeEnum responseCodeEnum) {
+        this.code = responseCodeEnum.getCode();
+        this.message = responseCodeEnum.getMsg();
+    }
+    public BusinessException(ResponseCodeEnum responseCodeEnum, String message) {
+        this.code = responseCodeEnum.getCode();
+        this.message = message;
+    }
+
+
+    public BusinessException(Integer code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+}

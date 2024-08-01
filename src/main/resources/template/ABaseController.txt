@@ -1,0 +1,60 @@
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * @Description controller模块基类 封装了消息返回机制  可自行封装controller常用的功能
+ * @Author Paprika
+ **/
+
+public class ABaseController {
+
+    protected static final String STATUS_SUCCESS = "success";
+
+    protected static final String STATUS_ERROR = "error";
+
+
+    // 在后面的具体controller里面 如果成功获取则调用这个baseVO
+    // T t就是数据体  存放map就行  new HashMap<>();  里面存放ket value值就行
+
+    protected <T> ResponseVO getSuccessResponseVONullData() {
+        ResponseVO<T> responseVO = new ResponseVO<>();
+        responseVO.setStatus(STATUS_SUCCESS);
+        responseVO.setCode(ResponseCodeEnum.CODE_200.getCode());
+        responseVO.setInfo(ResponseCodeEnum.CODE_200.getMsg());
+        responseVO.setData(null);
+        return responseVO;
+    }
+
+    protected <T> ResponseVO getSuccessResponseVO(T t) {
+        ResponseVO<T> responseVO = new ResponseVO<>();
+        responseVO.setStatus(STATUS_SUCCESS);
+        responseVO.setCode(ResponseCodeEnum.CODE_200.getCode());
+        responseVO.setInfo(ResponseCodeEnum.CODE_200.getMsg());
+        responseVO.setData(t);
+        return responseVO;
+    }
+
+    protected <T> ResponseVO getBusinessErrorResponseVO(BusinessException e, T t) {
+        ResponseVO vo = new ResponseVO();
+        vo.setStatus(STATUS_ERROR);
+        if (e.getCode() == null) {
+            vo.setCode(ResponseCodeEnum.CODE_600.getCode());
+        } else {
+            vo.setCode(e.getCode());
+        }
+        vo.setInfo(e.getMessage());
+        vo.setData(t);
+        return vo;
+    }
+
+    protected <T> ResponseVO getServerErrorResponseVO(T t){
+        ResponseVO vo=new ResponseVO();
+        vo.setStatus(STATUS_ERROR);
+        vo.setCode(ResponseCodeEnum.CODE_500.getCode());
+        vo.setInfo(ResponseCodeEnum.CODE_500.getMsg());
+        vo.setData(t);
+        return vo;
+    }
+
+}

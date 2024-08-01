@@ -1,0 +1,32 @@
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * @Description 时间格式Enum
+ * @Author Paprika
+ */
+
+public enum DateTimePatternEnum {
+    YYYY_MM_DD_HH_MM_SS("yyyy-mm-dd HH:mm:ss"),YYYY_MM_DD("yyyy-mm-dd");
+
+    private String pattern;
+
+    DateTimePatternEnum(String pattern){
+        this.pattern = pattern;
+    }
+
+    public String getPattern(){
+        return pattern;
+    }
+
+    public static String getCurTimeFormatted(){
+        // 定义目标格式
+        SimpleDateFormat sdf = new SimpleDateFormat(DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.pattern);
+
+        // 格式化当前时间
+        return sdf.format(new Date());
+    }
+
+
+}
