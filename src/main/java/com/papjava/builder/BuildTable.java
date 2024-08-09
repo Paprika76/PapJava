@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
  * @ClassName BuilderTable
  * @Description
  * @Author Paprika
- * @date 2024-07-24
  **/
 
 public class BuildTable {
@@ -50,11 +49,11 @@ public class BuildTable {
             Class.forName(driverName) ;
             conn = DriverManager.getConnection(url,user, password);
         } catch(Exception e){
-                logger.error("数据库连接失败",e);
-
+//            logger.error("数据库连接失败",e);
+            logger.error("数据库连接失败, 请到application.properties配置文件中配置好所有相关的内容");
+            System.exit(1);
         }
     }
-
 
     /**
      * show tables能获取到所有表名      show table status能获取到所有表名还有很多状态信息！！！！

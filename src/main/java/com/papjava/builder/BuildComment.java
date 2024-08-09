@@ -12,7 +12,6 @@ import java.util.Date;
  * @ClassName BuildComment
  * @Description
  * @Author Paprika
- * @date 2024-07-27
  **/
 
 public class BuildComment {

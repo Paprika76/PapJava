@@ -6,7 +6,6 @@ import com.papjava.utils.PropertiesUtils;
  * @ClassName Constants
  * @Description
  * @Author Paprika
- * @date 2024-07-24
  **/
 
 public class Constants {

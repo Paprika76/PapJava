@@ -6,7 +6,6 @@ import java.util.List;
  * @ClassName TableInfo
  * @Description  主要从show full FIELDS from xx_table中获取
  * @Author Paprika
- * @date 2024-07-24
  **/
 
 public class FieldInfo {

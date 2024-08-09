@@ -7,7 +7,6 @@ import java.util.Locale;
  * @ClassName StingUtils
  * @Description
  * @Author Paprika
- * @date 2024-07-24
  **/
 
 public class StringUtils {

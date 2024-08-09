@@ -5,12 +5,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @ClassName BuildBase
  * @Description
  * @Author Paprika
- * @date 2024-07-28
  **/
 
 public class BuildBase {
@@ -101,6 +102,7 @@ public class BuildBase {
             bw = new BufferedWriter(outw);
             String templatePath = BuildBase.class.getClassLoader().getResource("template/" + fileName +
                     ".txt").getPath();
+            templatePath = URLDecoder.decode(templatePath, StandardCharsets.UTF_8.name());
             in = new FileInputStream(templatePath);
             inr = new InputStreamReader(in, "utf-8");
             bf = new BufferedReader(inr);

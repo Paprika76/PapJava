@@ -1,5 +1,6 @@
 package com.papjava;
 
+import com.papjava.bean.Constants;
 import com.papjava.bean.TableInfo;
 import com.papjava.builder.*;
 
@@ -9,7 +10,6 @@ import java.util.List;
  * @ClassName RunApplication
  * @Description
  * @Author Paprika
- * @date 2024-07-24
  **/
 
 public class RunApplication {
@@ -28,6 +28,8 @@ public class RunApplication {
             BuildService.execute(tableInfo);
             BuildServiceImpl.execute(tableInfo);
             BuildController.execute(tableInfo);
+            System.out.println("\n"+"------------------------已生成完毕，生成代码路径如下：：----------------------\n"+Constants.PATH_BASE.replace("/", "\\"));
+
         }
     }
 }

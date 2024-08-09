@@ -3,9 +3,7 @@ package com.papjava.builder;
 import com.papjava.bean.Constants;
 import com.papjava.bean.FieldInfo;
 import com.papjava.bean.TableInfo;
-import com.papjava.utils.DateUtils;
 import com.papjava.utils.StringUtils;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +16,6 @@ import java.util.List;
  * @ClassName BuildQuery
  * @Description
  * @Author Paprika
- * @date 2024-07-28
  **/
 
 public class BuildQuery {

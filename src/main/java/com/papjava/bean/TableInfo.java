@@ -9,7 +9,6 @@ import java.util.Map;
  * @ClassName TableInfo
  * @Description   主要从show table status中获取
  * @Author Paprika
- * @date 2024-07-24
  **/
 
 public class TableInfo {
