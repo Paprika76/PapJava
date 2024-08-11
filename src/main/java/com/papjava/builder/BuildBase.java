@@ -22,46 +22,49 @@ public class BuildBase {
 
         String importStr = "";
 
+        build("pom.xml", Constants.PATH_ROOT);
+
+
         //生成vo常用模块类 分页器
-        build(Constants.PACKAGE_VO,"PaginationResultVO", Constants.PATH_VO);
+        build(Constants.PACKAGE_VO,"PaginationResultVO.java", Constants.PATH_VO);
 
         //生成vo常用模块类 数据响应体
-        build(Constants.PACKAGE_VO,"ResponseVO", Constants.PATH_VO);
+        build(Constants.PACKAGE_VO,"ResponseVO.java", Constants.PATH_VO);
 
         //生成date枚举enum模块
-        build(Constants.PACKAGE_ENUMS,"DateTimePatternEnum", Constants.PATH_ENUMS);
+        build(Constants.PACKAGE_ENUMS,"DateTimePatternEnum.java", Constants.PATH_ENUMS);
 
         //生成date枚举utils模块
-        build(Constants.PACKAGE_UTILS,"DateUtils", Constants.PATH_UTILS);
+        build(Constants.PACKAGE_UTILS,"DateUtils.java", Constants.PATH_UTILS);
 
         //生成BaseMapper mapper模块中!!
-        build(Constants.PACKAGE_MAPPER,"BaseMapper", Constants.PATH_MAPPER);
+        build(Constants.PACKAGE_MAPPER,"BaseMapper.java", Constants.PATH_MAPPER);
 
         //生成pageSize enum模块
         String pageSizeEnum = "PageSize";
-        build(Constants.PACKAGE_ENUMS,pageSizeEnum, Constants.PATH_ENUMS);
+        build(Constants.PACKAGE_ENUMS,pageSizeEnum+".java", Constants.PATH_ENUMS);
         //生成ResponseCodeEnum enum模块
         String responseCodeEnum = "ResponseCodeEnum";
-        build(Constants.PACKAGE_ENUMS,responseCodeEnum, Constants.PATH_ENUMS);
+        build(Constants.PACKAGE_ENUMS,responseCodeEnum+".java", Constants.PATH_ENUMS);
 
 
         //生成BaseQuery query模块
-        build(Constants.PACKAGE_QUERY,"BaseQuery", Constants.PATH_QUERY);
+        build(Constants.PACKAGE_QUERY,"BaseQuery.java", Constants.PATH_QUERY);
 
         //生成SimplePage query模块
         importStr = "\nimport " + Constants.PACKAGE_ENUMS + "." + pageSizeEnum+";\n";
-        build(Constants.PACKAGE_QUERY,"SimplePage", Constants.PATH_QUERY, importStr);
+        build(Constants.PACKAGE_QUERY,"SimplePage.java", Constants.PATH_QUERY, importStr);
 
 
         //异常处理exception模块
         importStr = "\nimport " + Constants.PACKAGE_ENUMS + "." + responseCodeEnum+";\n";
-        build(Constants.PACKAGE_EXCEPTION,"BusinessException", Constants.PATH_EXCEPTION, importStr);
+        build(Constants.PACKAGE_EXCEPTION,"BusinessException.java", Constants.PATH_EXCEPTION, importStr);
 
         //ABaseController controller模块
         importStr = "\nimport "+Constants.PACKAGE_ENUMS+".ResponseCodeEnum;\n" +
                 "import "+Constants.PACKAGE_VO+".ResponseVO;\n" +
                 "import "+Constants.PACKAGE_EXCEPTION+".BusinessException;\n";
-        build(Constants.PACKAGE_CONTROLLER,"ABaseController", Constants.PATH_CONTROLLER, importStr);
+        build(Constants.PACKAGE_CONTROLLER,"ABaseController.java", Constants.PATH_CONTROLLER, importStr);
 
         importStr = "\nimport "+Constants.PACKAGE_ENUMS+".ResponseCodeEnum;\n" +
                 "import "+Constants.PACKAGE_VO+".ResponseVO;\n" +
@@ -77,7 +80,7 @@ public class BuildBase {
                 "import org.slf4j.LoggerFactory;\n" +
                 "\n" +
                 "import java.net.BindException;\n";
-        build(Constants.PACKAGE_CONTROLLER,"AGlobalExceptionHandlerController", Constants.PATH_CONTROLLER, importStr);
+        build(Constants.PACKAGE_CONTROLLER,"AGlobalExceptionHandlerController.java", Constants.PATH_CONTROLLER, importStr);
 
 
 
@@ -88,7 +91,15 @@ public class BuildBase {
         if (!folder.exists()) {
             folder.mkdirs();
         }
-        File javaFile = new File(outputPath, fileName + ".java");
+        String fileFullName = null;
+        fileFullName = fileName;
+        if(fileName.split("/.").length<1){
+            fileFullName = fileName+".java";
+            System.out.println("他妈的");
+        }else{
+            fileName = fileName.substring(0,fileName.lastIndexOf("."));
+        }
+        File javaFile = new File(outputPath, fileFullName);
         OutputStream out = null;
         OutputStreamWriter outw = null;
         BufferedWriter bw = null;
@@ -107,8 +118,12 @@ public class BuildBase {
             inr = new InputStreamReader(in, "utf-8");
             bf = new BufferedReader(inr);
             String lineInfo = null;
-            bw.write("package " + packageName+ ";\n");
-            bw.write(importStr);
+            if (!packageName.isEmpty()){
+                bw.write("package " + packageName+ ";\n");
+                bw.write(importStr);
+
+            }
+
             while ((lineInfo = bf.readLine()) != null) {
                 bw.write(lineInfo);
                 bw.newLine();
@@ -124,6 +139,11 @@ public class BuildBase {
 
     private static void build(String packageName, String fileName, String outputPath){
         build(packageName, fileName, outputPath, "");
+    }
+
+
+    private static void build(String fileName, String outputPath){
+        build("", fileName, outputPath, "");
     }
 
 }

@@ -56,6 +56,7 @@ public class Constants {
 
 
 
+    public static String PATH_ROOT;
     public static String PATH_BASE;
     public static String PATH_PO;
     public static String PATH_VO;
@@ -109,6 +110,7 @@ public class Constants {
         PACKAGE_CONTROLLER = PACKAGE_BASE + "." + PropertiesUtils.getString( "package.controller");
 
 
+        PATH_ROOT = PropertiesUtils.getString( "path.base");
         PATH_BASE = PropertiesUtils.getString( "path.base");
         PATH_BASE = PATH_BASE + PATH_JAVA;
         PATH_PO = PATH_BASE + "/" + PACKAGE_PO.replace(".","/");
