@@ -1,6 +1,7 @@
 package com.papjava.builder;
 
 import com.papjava.bean.Constants;
+import com.papjava.utils.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -100,6 +101,10 @@ public class BuildBase {
             fileName = fileName.substring(0,fileName.lastIndexOf("."));
         }
         File javaFile = new File(outputPath, fileFullName);
+//        if (javaFile.exists()){
+//            System.out.println(javaFile.getPath()+"\t已存在，请删除后再生成该文件！");
+//            return;
+//        }
         OutputStream out = null;
         OutputStreamWriter outw = null;
         BufferedWriter bw = null;
@@ -108,6 +113,7 @@ public class BuildBase {
         InputStreamReader inr = null;
         BufferedReader bf = null;
         try {
+            FileUtils.interceptExist(javaFile);
             out = new FileOutputStream(javaFile);
             outw = new OutputStreamWriter(out, "utf-8");
             bw = new BufferedWriter(outw);
@@ -121,7 +127,6 @@ public class BuildBase {
             if (!packageName.isEmpty()){
                 bw.write("package " + packageName+ ";\n");
                 bw.write(importStr);
-
             }
 
             while ((lineInfo = bf.readLine()) != null) {
@@ -131,7 +136,11 @@ public class BuildBase {
             bw.flush();
 
 
-        } catch (Exception e) {
+        }
+        catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+        catch (Exception e) {
             logger.error("生成基础模块类：{}，失败", fileName, e);
 
         }

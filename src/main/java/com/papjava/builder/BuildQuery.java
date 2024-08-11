@@ -3,6 +3,7 @@ package com.papjava.builder;
 import com.papjava.bean.Constants;
 import com.papjava.bean.FieldInfo;
 import com.papjava.bean.TableInfo;
+import com.papjava.utils.FileUtils;
 import com.papjava.utils.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
@@ -35,6 +36,7 @@ public class BuildQuery {
         OutputStreamWriter outw = null;
         BufferedWriter bw = null;
         try {
+            FileUtils.interceptExist(poFile);
             out = new FileOutputStream(poFile);
             outw = new OutputStreamWriter(out,"utf8");
             bw = new BufferedWriter(outw);
@@ -149,7 +151,11 @@ public class BuildQuery {
 
             bw.write("}");
             bw.flush();
-        }catch (Exception e){
+        }
+        catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+        catch (Exception e){
             logger.info("创建query失败：",e);
         }
 //        File file = new File(folder, tableInfo.getBeanName() + ".java");

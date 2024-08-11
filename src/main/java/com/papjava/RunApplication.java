@@ -28,7 +28,7 @@ public class RunApplication {
             BuildService.execute(tableInfo);
             BuildServiceImpl.execute(tableInfo);
             BuildController.execute(tableInfo);
-            System.out.println("\n"+"------------------------已生成完毕，生成代码路径如下：----------------------\n"+Constants.PATH_BASE.replace("/", "\\"));
+            System.out.println("\n"+"------------------------已生成完毕，生成代码路径如下：----------------------\n"+Constants.PATH_ROOT.replace("/", "\\"));
 
         }
     }

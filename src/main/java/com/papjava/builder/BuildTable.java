@@ -90,7 +90,7 @@ public class BuildTable {
 
 //                System.out.println("tableInfo:");
 //                System.out.println(tableInfo);
-                logger.info(JsonUtils.convertObj2Json(tableInfo));
+//                logger.info(JsonUtils.convertObj2Json(tableInfo));
                 tableInfoList.add(tableInfo);
 
             }
